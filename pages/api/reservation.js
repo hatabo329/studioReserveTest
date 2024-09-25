@@ -16,7 +16,11 @@ export default async function handler(req, res) {
 
     const timestamp = new Date().toLocaleString();  // 予約された日時
     const spreadsheetId = '1PGKlMo3vF484lBJSLMfdCaA_OFtEoskdnloAXEL2JfY';
-    const range = 'Sheet1!A:G'; // A列からG列までの範囲に保存
+
+    function generateUniqueId() {
+        return Math.random().toString(36).substr(2, 9);  // ランダムな9桁のIDを生成
+      }
+      
 
     try {
         await sheets.spreadsheets.values.append({
@@ -29,7 +33,7 @@ export default async function handler(req, res) {
           });
 
       res.status(200).json({ message: 'Reservation successful' });
-    } catch (error) {
+    } catch {
       res.status(500).json({ error: 'Error adding reservation' });
     }
   } else {
