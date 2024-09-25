@@ -94,7 +94,8 @@ export default function Home() {
         value={formData.memo}
         onChange={handleChange}
         />
-      <button type="submit">予約する</button>
+      <button type="submit">予約する!
+      </button>
     </form>
   );
 }
