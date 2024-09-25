@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     const reservations = rows.map((row) => ({ name: row[0], email: row[1], date: row[2] }));
 
     res.status(200).json(reservations);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Error fetching reservations' });
   }
 }
