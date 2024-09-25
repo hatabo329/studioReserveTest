@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const sheets = google.sheets({ version: 'v4', auth });
 
     const timestamp = new Date().toLocaleString();  // 予約された日時
-    const spreadsheetId = 'your-spreadsheet-id';
+    const spreadsheetId = '1PGKlMo3vF484lBJSLMfdCaA_OFtEoskdnloAXEL2JfY';
     const range = 'Sheet1!A:G'; // A列からG列までの範囲に保存
 
     try {

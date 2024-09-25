@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   });
 
   const sheets = google.sheets({ version: 'v4', auth });
-  const spreadsheetId = 'your-spreadsheet-id';
+  const spreadsheetId = '1PGKlMo3vF484lBJSLMfdCaA_OFtEoskdnloAXEL2JfY';
   const range = 'Sheet1!A:C'; // スプレッドシートの範囲
 
   try {
