@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import styles from '../components/ReservationTable.module.css';  // CSSモジュールのインポート
+import styles from './ReservationTable.module.css';  // CSSモジュールのインポート
 
 // 9:00から20:00までのタイムスロットを設定
 const hours = [
@@ -14,6 +14,9 @@ export default function ReservationTable() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);  // ポップアップの表示・非表示
   const [selectedStartTime, setSelectedStartTime] = useState('');  // 選択された開始時間
   const [selectedDay, setSelectedDay] = useState('');  // 選択された日付
+  const [name, setName] = useState('');  // フォームの名前
+  const [phone, setPhone] = useState('');  // フォームの電話番号
+  const [selectedEndTime, setSelectedEndTime] = useState('');  // 終了時間
 
   useEffect(() => {
     // Google Sheets APIから予約データを取得
@@ -74,6 +77,42 @@ export default function ReservationTable() {
     setIsPopupOpen(false);
   };
 
+  // フォーム送信時の処理
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const reservationData = {
+      name,
+      phone,
+      date: selectedDay,
+      startTime: selectedStartTime,
+      endTime: selectedEndTime,
+    };
+
+    try {
+      const res = await fetch('/api/reservation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reservationData),
+      });
+
+      if (res.ok) {
+        alert('予約が完了しました！');
+        closePopup();  // ポップアップを閉じる
+        // テーブルを再度更新
+        const updatedReservations = await res.json();
+        setReservations(updatedReservations);
+      } else {
+        alert('予約に失敗しました。');
+      }
+    } catch (error) {
+      console.error('Error submitting reservation:', error);
+      alert('予約にエラーが発生しました。');
+    }
+  };
+
   return (
     <div>
       <div className={styles['table-wrapper']}>
@@ -114,19 +153,38 @@ export default function ReservationTable() {
             <p>開始時間: {selectedStartTime}</p>
 
             {/* 予約フォーム */}
-            <form>
+            <form onSubmit={handleSubmit}>
               <label htmlFor="endTime">終了時間:</label>
-              <select id="endTime" name="endTime">
+              <select
+                id="endTime"
+                name="endTime"
+                value={selectedEndTime}
+                onChange={(e) => setSelectedEndTime(e.target.value)}
+              >
                 {hours.filter(h => h > selectedStartTime).map((endTime) => (
                   <option key={endTime} value={endTime}>{endTime}</option>
                 ))}
               </select>
 
               <label htmlFor="name">名前:</label>
-              <input type="text" id="name" name="name" required />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
 
               <label htmlFor="phone">電話番号:</label>
-              <input type="tel" id="phone" name="phone" required />
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
 
               <button type="submit">予約する</button>
             </form>
