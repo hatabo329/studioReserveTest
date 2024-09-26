@@ -114,22 +114,73 @@ export default function ReservationTable() {
             <p>開始時間: {selectedStartTime}</p>
 
             {/* 予約フォーム */}
-            <form>
-              <label htmlFor="endTime">終了時間:</label>
-              <select id="endTime" name="endTime">
-                {hours.filter(h => h > selectedStartTime).map((endTime) => (
-                  <option key={endTime} value={endTime}>{endTime}</option>
-                ))}
-              </select>
+            <form onSubmit={handleSubmit}>
+  <label htmlFor="email">メールアドレス:</label>
+  <input
+    type="email"
+    id="email"
+    name="email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    required
+  />
 
-              <label htmlFor="name">名前:</label>
-              <input type="text" id="name" name="name" required />
+  <label htmlFor="studio">スタジオ:</label>
+  <select
+    id="studio"
+    name="studio"
+    value={studio}
+    onChange={(e) => setStudio(e.target.value)}
+    required
+  >
+    <option value="スタジオ1">スタジオ1</option>
+    <option value="スタジオ2">スタジオ2</option>
+  </select>
 
-              <label htmlFor="phone">電話番号:</label>
-              <input type="tel" id="phone" name="phone" required />
+  {/* その他のフィールド */}
+  <label htmlFor="endTime">終了時間:</label>
+  <select
+    id="endTime"
+    name="endTime"
+    value={selectedEndTime}
+    onChange={(e) => setSelectedEndTime(e.target.value)}
+  >
+    {hours.filter(h => h > selectedStartTime).map((endTime) => (
+      <option key={endTime} value={endTime}>{endTime}</option>
+    ))}
+  </select>
 
-              <button type="submit">予約する</button>
-            </form>
+  <label htmlFor="name">名前:</label>
+  <input
+    type="text"
+    id="name"
+    name="name"
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+    required
+  />
+
+  <label htmlFor="phone">電話番号:</label>
+  <input
+    type="tel"
+    id="phone"
+    name="phone"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+    required
+  />
+
+  <label htmlFor="memo">メモ:</label>
+  <textarea
+    id="memo"
+    name="memo"
+    value={memo}
+    onChange={(e) => setMemo(e.target.value)}
+  ></textarea>
+
+  <button type="submit">予約する</button>
+</form>
+
 
             <button onClick={closePopup}>閉じる</button>
           </div>
