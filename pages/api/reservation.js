@@ -4,6 +4,9 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { name, phone, date, startTime, endTime } = req.body;
 
+        // 送信された予約データを確認
+        console.log('Reservation data:', req.body);
+
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.GOOGLE_CLIENT_EMAIL,
@@ -14,7 +17,7 @@ export default async function handler(req, res) {
 
     const sheets = google.sheets({ version: 'v4', auth });
 
-    const spreadsheetId = 'your-spreadsheet-id';  // スプレッドシートIDを指定
+    const spreadsheetId = '1PGKlMo3vF484lBJSLMfdCaA_OFtEoskdnloAXEL2JfY';  // スプレッドシートIDを指定
     const range = 'Sheet1!A:F'; // 保存するスプレッドシートの範囲
 
     try {
@@ -32,6 +35,9 @@ export default async function handler(req, res) {
         spreadsheetId,
         range: 'Sheet1!A:F',
       });
+
+            // Google Sheets APIのレスポンスを確認
+            console.log('Google Sheets API response:', updatedReservations);
 
       res.status(200).json(updatedReservations.data.values);
     } catch (error) {
