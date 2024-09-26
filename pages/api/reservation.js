@@ -35,6 +35,7 @@ export default async function handler(req, res) {
 
       res.status(200).json(updatedReservations.data.values);
     } catch (error) {
+      console.error('Error appending to spreadsheet:', error);
       res.status(500).json({ error: 'Error adding reservation' });
     }
   } else {

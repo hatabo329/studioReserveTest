@@ -5,21 +5,21 @@ export default function ReservationCalendar() {
   const [reservations, setReservations] = useState([]);
   const [selectedDateReservations, setSelectedDateReservations] = useState([]);  // 選択された日の予約情報
 
-  const isTimeSlotAvailable = (date, startTime, endTime) => {
-    return !reservations.some((reservation) => {
-      const reservationDate = new Date(reservation[2]);  // 予約日
-      const reservationStartTime = reservation[4];  // 予約開始時間
-      const reservationEndTime = reservation[5];    // 予約終了時間
+//   const isTimeSlotAvailable = (date, startTime, endTime) => {
+//     return !reservations.some((reservation) => {
+//       const reservationDate = new Date(reservation[2]);  // 予約日
+//       const reservationStartTime = reservation[4];  // 予約開始時間
+//       const reservationEndTime = reservation[5];    // 予約終了時間
   
-      if (reservationDate.toDateString() === date.toDateString()) {
-        return (
-          (startTime >= reservationStartTime && startTime < reservationEndTime) ||  // 重複
-          (endTime > reservationStartTime && endTime <= reservationEndTime)
-        );
-      }
-      return false;
-    });
-  };
+//       if (reservationDate.toDateString() === date.toDateString()) {
+//         return (
+//           (startTime >= reservationStartTime && startTime < reservationEndTime) ||  // 重複
+//           (endTime > reservationStartTime && endTime <= reservationEndTime)
+//         );
+//       }
+//       return false;
+//     });
+//   };
   
 
   useEffect(() => {
