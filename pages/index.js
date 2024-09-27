@@ -23,7 +23,7 @@ export default function ReservationTable() {
   const [phone, setPhone] = useState('');  // フォームの電話番号
   const [groupName, setGroupName] = useState('');  // groupNameを追加
   const [endTime, setEndTime] = useState('');  // endTimeを追加
-  const [selectedEndTime, setSelectedEndTime] = useState('');  // 終了時間
+  // const [selectedEndTime, setSelectedEndTime] = useState('');  // 終了時間
   const [memo, setMemo] = useState('');  // メモ
   const [isSubmitting, setIsSubmitting] = useState(false);  // 予約中かどうかのフラグ
 

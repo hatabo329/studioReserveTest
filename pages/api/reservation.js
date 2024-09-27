@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     const sheets = google.sheets({ version: 'v4', auth });
 
     const spreadsheetId = '1PGKlMo3vF484lBJSLMfdCaA_OFtEoskdnloAXEL2JfY';  // スプレッドシートIDを指定
-    const range = 'Sheet1!A:L'; // A列からL列までの範囲に保存
+    const range = 'Sheet1!A:M'; // A列からL列までの範囲に保存
 
     try {
       await sheets.spreadsheets.values.append({
@@ -37,18 +37,19 @@ export default async function handler(req, res) {
         valueInputOption: 'RAW',
         resource: {
           values: [[
-            studio,        // スタジオ
-            name,          // 代表者氏名
-            phone,         // 電話番号
-            date,          // 予約日
-            startTime,     // 開始時間
-            endTime,       // 終了時間
-            email,         // メールアドレス
-            numPeople,     // 利用人数
-            groupName,     // 団体名
-            memo,          // メモ
-            status,        // ステータス
-            reservationId  // 予約ID
+            studio,        // A列: スタジオ
+            name,          // B列: 代表者氏名
+            phone,         // C列: 電話番号
+            date,          // D列: 予約日
+            startTime,     // E列: 開始時間
+            endTime,       // F列: 終了時間
+            email,         // G列: メールアドレス
+            numPeople,     // H列: 利用人数
+            groupName,     // I列: 団体名
+            memo,          // J列: メモ
+            status,        // K列: ステータス
+            reservationId, // L列: 予約ID
+            reservationTimestamp  // M列: 登録日時
           ]],
         },
       });
