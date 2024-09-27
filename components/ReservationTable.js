@@ -82,12 +82,21 @@ export default function ReservationTable() {
     e.preventDefault();
 
     const reservationData = {
-      name,
-      phone,
-      date: selectedDay,
-      startTime: selectedStartTime,
-      endTime: selectedEndTime,
+        name,
+        email,
+        date: selectedDay,
+        studio,
+        startTime: selectedStartTime,
+        endTime: selectedEndTime,
+        phone,
+        memo,
+        numPeople,
+        groupName,
     };
+
+  // デバッグ用に送信データをログに出力
+  console.log('送信する予約データ:', reservationData);
+
 
     try {
       const res = await fetch('/api/reservation', {

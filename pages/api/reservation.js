@@ -2,7 +2,11 @@ import { google } from 'googleapis';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, email, date, studio, startTime, endTime, phone, memo } = req.body;
+    const { name, phone, date, startTime, endTime, email, numPeople, groupName, memo, studio } = req.body;
+
+        // デバッグ用: 受け取ったデータをコンソールに出力
+        console.log('受け取ったデータ:', req.body);
+
 
     // 予約IDを生成
     function generateUniqueId() {
@@ -24,7 +28,7 @@ export default async function handler(req, res) {
     const sheets = google.sheets({ version: 'v4', auth });
 
     const spreadsheetId = '1PGKlMo3vF484lBJSLMfdCaA_OFtEoskdnloAXEL2JfY';  // スプレッドシートIDを指定
-    const range = 'Sheet1!A:K'; // A列からK列までの範囲に保存
+    const range = 'Sheet1!A:L'; // A列からL列までの範囲に保存
 
     try {
       await sheets.spreadsheets.values.append({
@@ -32,14 +36,27 @@ export default async function handler(req, res) {
         range,
         valueInputOption: 'RAW',
         resource: {
-          values: [[name, email, date, studio, startTime, endTime, reservationId, status, phone, memo, reservationTimestamp]],
+          values: [[
+            studio,        // スタジオ
+            name,          // 代表者氏名
+            phone,         // 電話番号
+            date,          // 予約日
+            startTime,     // 開始時間
+            endTime,       // 終了時間
+            email,         // メールアドレス
+            numPeople,     // 利用人数
+            groupName,     // 団体名
+            memo,          // メモ
+            status,        // ステータス
+            reservationId  // 予約ID
+          ]],
         },
       });
 
       // 予約後の最新データを返す
       const updatedReservations = await sheets.spreadsheets.values.get({
         spreadsheetId,
-        range: 'Sheet1!A:K',
+        range: 'Sheet1!A:L',
       });
 
       // Google Sheets APIのレスポンスを確認
