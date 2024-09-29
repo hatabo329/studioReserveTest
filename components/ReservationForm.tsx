@@ -5,7 +5,6 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
 
 interface ReservationFormProps {
@@ -33,9 +32,7 @@ export default function ReservationForm({ initialDate, initialStartTime, initial
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData({ ...formData, [name]: value });
-  };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

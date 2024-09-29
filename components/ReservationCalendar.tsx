@@ -24,15 +24,22 @@ type Reservation = {
     studio: string;
     groupName: string;
     memo: string;
-    status: string;   // 予約のステータスを追加
+    status: string;
     reservationId: string;
     timestamp: string;
 };
 
+type Slot = {
+    start: Date;
+    end: Date;
+  };
+
 export default function ReservationCalendar() {
   const [showForm, setShowForm] = useState(false);
-  const [selectedSlot, setSelectedSlot] = useState<any>(null);
+  const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
   const [reservations, setReservations] = useState<Reservation[]>([]);  // 型定義を適用
+
+  
 
   useEffect(() => {
     moment.locale('ja'); // クライアントサイドで日本語に設定
@@ -57,20 +64,7 @@ export default function ReservationCalendar() {
     setShowForm(true);
   }, []);
 
-  // 時間スロットが予約済みかどうかを確認
-  const isTimeSlotReserved = (date: string, time: string) => {
-    return reservations.some((reservation) => {
-      const reservationDate = moment(reservation.date).format('YYYY-MM-DD');
-      const reservationStartTime = reservation.startTime;
-      const reservationEndTime = reservation.endTime;
 
-      const startHour = parseInt(reservationStartTime.split(':')[0], 10);
-      const endHour = parseInt(reservationEndTime.split(':')[0], 10);
-      const currentHour = parseInt(time.split(':')[0], 10);
-
-      return reservationDate === date && currentHour >= startHour && currentHour <= endHour;
-    });
-  };
 
   const { min, max, scrollToTime } = useMemo(() => {
     const today = moment().startOf('day');
