@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, phone, date, startTime, endTime, email, numPeople, groupName, memo, studio } = req.body;
+    const { name, phone, date, startTime, endTime, email, people, groupName, memo, studio } = req.body;
 
         // デバッグ用: 受け取ったデータをコンソールに出力
         console.log('受け取ったデータ:', req.body);
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
             startTime,     // E列: 開始時間
             endTime,       // F列: 終了時間
             email,         // G列: メールアドレス
-            numPeople,     // H列: 利用人数
+            people,     // H列: 利用人数
             groupName,     // I列: 団体名
             memo,          // J列: メモ
             status,        // K列: ステータス

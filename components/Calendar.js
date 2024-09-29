@@ -9,7 +9,7 @@ export default function ReservationCalendar() {
     const fetchReservations = async () => {
       const res = await fetch('/api/getReservations');
       const data = await res.json();
-      setReservations(data);
+      setReservations(data);  
     };
     fetchReservations();
   }, []);
