@@ -27,6 +27,8 @@
   background-color: #f1f1f1;
 }
 
+
+
 /* モーダルウィンドウ */
 .modal {
   position: fixed;
@@ -54,10 +56,9 @@
 }
 
 
-/* スマホでの横スクロール対応 */
-.table-wrapper {
-  overflow-x: scroll;
-}
+
+
+
 
 .popup {
   position: fixed;

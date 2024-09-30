@@ -1,3 +1,22 @@
+.calendar {
+  min-width: 600px; /* 横幅を600pxなどに固定 */
+}
+
+
+.calendar-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+
+
+/* タップ領域を広げる */
+.calendar-slot {
+  min-height: 50px; /* スマホでタップしやすい高さにする */
+}
+
+
+
 /* モーダルウィンドウ */
 .modal {
   position: fixed;
@@ -15,6 +34,7 @@
 
 /* モーダルウィンドウ */
 .modal-content {
+  max-width: 100%; /* スマホでは全幅を使う */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -23,12 +43,15 @@
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  height: auto; /* 高さも調整可能に */
   width: 90%;
   max-width: 500px;
   border-radius: 8px;
   max-height: 80vh; /* 高さが80%を超えたらスクロール */
   overflow-y: auto; /* 縦スクロールを有効化 */
 }
+
+
 
 /* 背景を薄暗くする */
 .modal-overlay {
@@ -39,4 +62,21 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+}
+
+/* スマホでの横スクロール対応 */
+.table-wrapper {
+  overflow-x: scroll;
+}
+
+
+@media (max-width: 768px) {
+  .calendar-wrapper {
+    overflow-x: auto; /* 横スクロールを有効に */
+    padding: 10px; /* スマホ用のパディング */
+  }
+
+  .calendar {
+    min-width: 800px; /* モバイル画面では横にスクロール可能な幅に */
+  }
 }

@@ -82,6 +82,7 @@ export default function ReservationCalendar() {
 
   return (
     <div className="h-screen p-4">
+      <div className="calendar-wrapper">
       <Calendar
   localizer={localizer}
   events={reservations.map((reservation) => ({
@@ -91,7 +92,7 @@ export default function ReservationCalendar() {
   }))}
   startAccessor="start"
   endAccessor="end"
-  style={{ height: '80vh' }}
+  style={{ height: '80vh', minWidth: '900px' }}
   selectable
   onSelectSlot={handleSelectSlot}
   min={min}
@@ -106,6 +107,7 @@ export default function ReservationCalendar() {
     toolbar: CustomToolbar,
   }}
 />
+</div>
 
 
       {/* モーダルとして予約フォームを表示 */}
